@@ -7,9 +7,9 @@
     }
   ],
   "routes": [
-    {
-      "src": "/((?!styles\\.css|app\\.js).*)",
-      "dest": "/index.html"
-    }
+    { "src": "/styles.css", "dest": "/styles.css" },
+    { "src": "/app.js", "dest": "/app.js" },
+    { "src": "/dashboard.html", "dest": "/dashboard.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
