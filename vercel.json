@@ -1,3 +1,17 @@
 {
-  "version": 2
+  "version": 2,
+  "cleanUrls": true,
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "^/$",
+      "dest": "/index.html"
+    },
+    {
+      "src": "^/dashboard$",
+      "dest": "/dashboard.html"
+    }
+  ]
 }
