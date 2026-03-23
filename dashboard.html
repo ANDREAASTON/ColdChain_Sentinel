@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ColdChain Sentinel – Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─── ALERT AUDIO ─────────────────────────────────────────── -->
+<!-- Web Audio API used in app.js; no external files needed -->
+
+<div class="dashboard">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="icon">❄️</span>
+      <span>ColdChain Sentinel</span>
+    </div>
+    <div class="topbar-right">
+      <div class="live-dot"></div>
+      <span class="live-label" id="lastUpdate">Connecting…</span>
+      <span class="user-tag" id="userTag">—</span>
+      <button class="btn-outline" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- CRITICAL ALERT BANNER -->
+    <div class="alert-banner hidden" id="alertBanner">
+      <span class="alert-icon">🚨</span>
+      <span id="alertText">Critical condition detected</span>
+    </div>
+
+    <!-- ENVIRONMENTAL STATUS -->
+    <div class="section">
+      <p class="section-title">Environmental Status</p>
+      <div class="stat-grid">
+
+        <div class="stat-card" id="cardTemp">
+          <div class="stat-label">🌡 Temperature</div>
+          <div class="stat-value" id="valTemp">--.-</div>
+          <div class="stat-sub">°Celsius — threshold 28°C</div>
+        </div>
+
+        <div class="stat-card" id="cardHum">
+          <div class="stat-label">💧 Humidity</div>
+          <div class="stat-value" id="valHum">--.-</div>
+          <div class="stat-sub">% Relative Humidity</div>
+        </div>
+
+        <div class="stat-card" id="cardGas">
+          <div class="stat-label">☁️ Gas Status</div>
+          <div class="stat-value" id="valGas">---</div>
+          <div class="stat-sub">MQ-2 Digital Output</div>
+        </div>
+
+        <div class="stat-card" id="cardPower">
+          <div class="stat-label">⚡ Power Source</div>
+          <div class="stat-value" id="valPower">---</div>
+          <div class="stat-sub" id="subPower">Monitoring grid input</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAN STATES -->
+    <div>
+      <p class="section-title">Ventilation Fans</p>
+      <div class="fan-grid">
+        <div class="fan-card" id="fanGasCard">
+          <div class="fan-icon">🌀</div>
+          <div class="fan-name">Gas Ventilation Fan</div>
+          <div class="fan-state" id="fanGasState">OFF</div>
+        </div>
+        <div class="fan-card" id="fanTempCard">
+          <div class="fan-icon">🌀</div>
+          <div class="fan-name">Temperature Cooling Fan</div>
+          <div class="fan-state" id="fanTempState">OFF</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW: recent alerts + event logs -->
+    <div class="bottom-row">
+
+      <!-- RECENT ALERTS -->
+      <div>
+        <p class="section-title">Recent Alerts</p>
+        <div class="log-panel">
+          <div class="log-header">
+            <h3>Active Alerts</h3>
+            <span id="alertCount" class="log-badge badge-red">0</span>
+          </div>
+          <div class="log-list" id="alertList">
+            <div class="log-row" style="color:var(--text-dim);">
+              <span class="log-time">—</span>
+              <span>—</span>
+              <span>No active alerts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT LOG -->
+      <div>
+        <p class="section-title">Event Log</p>
+        <div class="log-panel">
+          <div class="log-header">
+            <h3>Access &amp; Environment Log</h3>
+            <button class="btn-outline" id="refreshLog">↻ Refresh</button>
+          </div>
+          <div class="log-list" id="eventLog">
+            <div class="log-row" style="color:var(--text-dim);">
+              <span class="log-time">Loading…</span>
+              <span>—</span>
+              <span>—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bottom-row -->
+
+  </main><!-- /content -->
+</div><!-- /dashboard -->
+
+<script src="app.js"></script>
+</body>
+</html>

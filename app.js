@@ -19,7 +19,7 @@ const ALERT_POLL_MS = 8_000;  // Alert log refresh interval
 // ─── AUTH GUARD ───────────────────────────────────────────────────────────────
 const token = sessionStorage.getItem("sb_access_token");
 if (!token) {
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 document.getElementById("userTag").textContent =
@@ -27,7 +27,7 @@ document.getElementById("userTag").textContent =
 
 document.getElementById("logoutBtn").addEventListener("click", () => {
   sessionStorage.clear();
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 });
 
 
