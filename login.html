@@ -5,6 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ColdChain Sentinel – Login</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Initialize Supabase
+    const SUPABASE_URL = "https://qcojndalmzrlhfhcinhk.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjb2puZGFsbXpybGhmaGNpbmhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMTg3MTAsImV4cCI6MjA4OTc5NDcxMH0.OipZIfHCuui32ltsKmKe7LmRpvOwsvJqORKcu_qxk2s";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('loginError');
+      const btn = document.getElementById('loginBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('btnSpinner');
+
+      btn.disabled = true;
+      btnText.textContent = 'Signing In...';
+      spinner.style.display = 'inline-block';
+      errorDiv.style.display = 'none';
+
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (error) throw error;
+
+        // Store tokens
+        sessionStorage.setItem('sb_access_token', data.session.access_token);
+        sessionStorage.setItem('sb_user_email', data.user.email);
+
+        // Redirect to dashboard
+        window.location.href = 'index.html';
+      } catch (err) {
+        errorDiv.textContent = err.message;
+        errorDiv.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btnText.textContent = 'Sign In';
+        spinner.style.display = 'none';
+      }
+    });
+  </script>
 </head>
 <body class="login-page">
 
